@@ -24,7 +24,9 @@ namespace ToDoList
                 Console.WriteLine("Thanks for self isolating!");
             }
         }
-
+        /// <summary>
+        /// Main interface that user has option to choose from main menu
+        /// </summary>
         public static void StartSequence()
         {
             try

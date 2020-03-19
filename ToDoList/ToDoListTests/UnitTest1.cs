@@ -9,6 +9,9 @@ namespace ToDoListTests
     {
         string path = "List.txt";
 
+        /// <summary>
+        /// This is a method for viewing all of the lists.
+        /// </summary>
         [Fact]
         public void ViewingListDoesntChangeList()
         {
@@ -20,7 +23,7 @@ namespace ToDoListTests
             Assert.Equal(fileText, File.ReadAllText(path));
         }
         /// <summary>
-        /// This is for test 
+        /// This is for test for writing a file method 
         /// </summary>
         [Fact]
         public void WritingToFileWritesToFile()
@@ -34,7 +37,7 @@ namespace ToDoListTests
         }
 
         /// <summary>
-        /// This to test update functionality
+        /// This to test update method
         /// </summary>
         [Fact]
         public void UpdateToFiles()
