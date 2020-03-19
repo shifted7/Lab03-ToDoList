@@ -1,6 +1,5 @@
-poop
-two
-three
-five
-six
-seven
+Pet dog
+Clean the house
+Pet dog again
+Sleep on time and wake up
+Pet gold fish
