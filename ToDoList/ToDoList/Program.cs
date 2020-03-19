@@ -7,7 +7,7 @@ namespace ToDoList
     {
         static void Main()
         {
-            Console.WriteLine("To-do list:");
+            Console.WriteLine("Quarantine To-do list:");
             Console.WriteLine("1. Add item");
 
             string userInput = Console.ReadLine();
@@ -23,7 +23,11 @@ namespace ToDoList
         }
         static void WriteToAFile(string path)
         {
-            File.WriteAllText(path, "test");
+
+            Console.WriteLine("What do you want to add to this list?");
+            string[] input = { Console.ReadLine() };
+            // File.WriteAllText(path, ""); 
+            File.AppendAllLines(path, input);
         }
     }
 }
