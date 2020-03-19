@@ -11,6 +11,7 @@ namespace ToDoList
             Console.WriteLine("1. Add item");
             Console.WriteLine("2. View Items");
             Console.WriteLine("3. Update Items");
+            Console.WriteLine("4. Delete Item");
 
             string userInput = Console.ReadLine();
             if (userInput == "1")
@@ -24,6 +25,11 @@ namespace ToDoList
             else if (userInput == "3")
             {
                 UpdateList("../../../List.txt");
+            }
+            else if (userInput == "4") {
+                Console.WriteLine("Enter the index of the item you want to delete:");
+                int lineToDelete = Convert.ToInt32(Console.ReadLine());
+                DeleteItem("../../../List.txt", lineToDelete);
             }
             else
             {
@@ -75,6 +81,23 @@ namespace ToDoList
             string input = Console.ReadLine();
             myList[indexParse-1] = input;
             File.WriteAllLines(path, myList);
+        }
+
+        public static void DeleteItem(string path, int lineToDelete)
+        {
+            string[] fileText = File.ReadAllLines(path);
+
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                for (int i = 0; i < fileText.Length; i++)
+                {
+
+                    if (i != lineToDelete)
+                    {
+                        writer.WriteLine(fileText[i]);
+                    }
+                }
+            }
         }
 
 
