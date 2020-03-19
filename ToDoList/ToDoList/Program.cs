@@ -37,6 +37,7 @@ namespace ToDoList
                 Console.WriteLine("5. Exit Application");
 
                 string userInput = Console.ReadLine();
+                Console.WriteLine("");
                 if (userInput == "1")
                 {
                     Console.WriteLine("What do you want to add to this list?");
@@ -128,6 +129,7 @@ namespace ToDoList
             {
                 Console.WriteLine(myList[i]);
             }
+            Console.WriteLine("");
         }
 
         /// <summary>
