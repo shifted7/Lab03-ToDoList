@@ -5,6 +5,8 @@ namespace ToDoList
 {
     public class Program
     {
+        public static string logPath = "../../../Log.txt";
+
         static void Main()
         {
             try
@@ -13,6 +15,8 @@ namespace ToDoList
             }
             catch (Exception e)
             {
+                string[] errors = { $"{DateTime.Now}: {e.Message}" };
+                File.AppendAllLines(logPath, errors);
                 Console.WriteLine(e.Message);
             }
             finally
@@ -35,7 +39,9 @@ namespace ToDoList
                 string userInput = Console.ReadLine();
                 if (userInput == "1")
                 {
-                    WriteToAFile("../../../List.txt");
+                    Console.WriteLine("What do you want to add to this list?");
+                    string[] input = { Console.ReadLine() };
+                    WriteToAFile("../../../List.txt", input);
                 }
                 else if (userInput == "2")
                 {
@@ -63,11 +69,15 @@ namespace ToDoList
             }
             catch (FormatException e)
             {
+                string[] errors = { $"{DateTime.Now}: {e.Message}" };
+                File.AppendAllLines(logPath, errors);
                 Console.WriteLine($"So this happened: {e.Message}");
                 StartSequence();
             }
             catch (OverflowException e)
             {
+                string[] errors = { $"{DateTime.Now}: {e.Message}" };
+                File.AppendAllLines(logPath, errors);
                 Console.WriteLine($"Why did you do this: {e.Message}");
             }
         }
@@ -76,20 +86,20 @@ namespace ToDoList
         /// Writes a new to do list item to the file at the end of the file.
         /// </summary>
         /// <param name="path">The path of the file to write to.</param>
-        public static void WriteToAFile(string path)
+        public static void WriteToAFile(string path, string[] input)
         {
             try
             {
-                Console.WriteLine("What do you want to add to this list?");
-                string[] input = { Console.ReadLine() };
                 if (input == null)
                 {
                     throw new Exception("Cannot add empty dreams to your list.");
                 }
                 File.AppendAllLines(path, input);
             }
-            catch (FileNotFoundException)
+            catch (FileNotFoundException e)
             {
+                string[] errors = { $"{DateTime.Now}: {e.Message}" };
+                File.AppendAllLines(logPath, errors);
                 Console.WriteLine("Your file is not available"); ;
             }
          
@@ -131,6 +141,8 @@ namespace ToDoList
             }
             catch (IndexOutOfRangeException e)
             {
+                string[] errors = { $"{DateTime.Now}: {e.Message}" };
+                File.AppendAllLines(logPath, errors);
                 Console.WriteLine(e.Message);
                 UpdateList(path);
             }
