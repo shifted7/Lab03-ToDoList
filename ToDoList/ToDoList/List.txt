@@ -1,6 +1,4 @@
-poop
-two
-three
-five
-six
 seven
+tomato
+apple
+banana

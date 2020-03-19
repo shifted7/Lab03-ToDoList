@@ -6,7 +6,7 @@ namespace ToDoList
     public class Program
     {
         public static string logPath = "../../../Log.txt";
-
+        public static string path = "../../../List.txt";
         static void Main()
         {
             try
@@ -49,13 +49,26 @@ namespace ToDoList
                 }
                 else if (userInput == "3")
                 {
-                    UpdateList("../../../List.txt");
+                    string[] myList = File.ReadAllLines(path);
+
+                    for (int i = 0; i < myList.Length; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {myList[i]} ");
+                    }
+                    Console.WriteLine("What do you want to update?");
+                    string index = Console.ReadLine();
+                    int indexParse = Convert.ToInt32(index);
+                    Console.WriteLine("What do you want to change it to?");
+                    string input = Console.ReadLine();
+
+                    UpdateList(path, indexParse, input, myList);
                 }
                 else if (userInput == "4")
                 {
+                    ReadAllLines(path);
                     Console.WriteLine("Enter the index of the item you want to delete:");
                     int lineToDelete = Convert.ToInt32(Console.ReadLine());
-                    DeleteItem("../../../List.txt", lineToDelete);
+                    DeleteItem("../../../List.txt", lineToDelete-1);
                 }
                 else if (userInput == "5")
                 {
@@ -121,21 +134,11 @@ namespace ToDoList
         /// Update an item on the to do list.
         /// </summary>
         /// <param name="path">The path of the file to write to.</param>
-        public static void UpdateList(string path)
+        public static void UpdateList(string path, int indexParse, string input, string[] myList)
         {
             try
             {
-                string[] myList = File.ReadAllLines(path);
-
-                for (int i = 0; i < myList.Length; i++)
-                {
-                    Console.WriteLine($"{i + 1}. {myList[i]} ");
-                }
-                Console.WriteLine("What do you want to update?");
-                string index = Console.ReadLine();
-                int indexParse = Convert.ToInt32(index);
-                Console.WriteLine("What do you want to change it to?");
-                string input = Console.ReadLine();
+                // cut here
                 myList[indexParse - 1] = input;
                 File.WriteAllLines(path, myList);
             }
@@ -144,7 +147,7 @@ namespace ToDoList
                 string[] errors = { $"{DateTime.Now}: {e.Message}" };
                 File.AppendAllLines(logPath, errors);
                 Console.WriteLine(e.Message);
-                UpdateList(path);
+                UpdateList(path, indexParse, input, myList);
             }
         }
 

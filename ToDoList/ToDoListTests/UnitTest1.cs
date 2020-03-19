@@ -30,5 +30,50 @@ namespace ToDoListTests
 
             Assert.Equal(test, File.ReadAllLines(path));
         }
+
+        /// <summary>
+        /// This to test update functionality
+        /// </summary>
+        [Fact]
+        public void UpdateToFiles()
+        {
+
+            File.Delete(path);
+
+            string[] test = { "Some dummy text.",
+                               "Some dumb text" };
+
+            File.WriteAllLines(path, test);
+
+            string[] myList = File.ReadAllLines(path);
+
+            string updatedText = "Banana";
+
+            Program.UpdateList(path, 2, updatedText, myList);
+
+            Assert.Equal("Banana", myList[1]);
+
+        }
+        /// <summary>
+        /// Check if the length of original array is minus one after using delete method
+        /// </summary>
+        [Fact]
+        public void DeleteLine()
+        {
+            File.Delete(path);
+
+            string[] test = { "1banana", "2apple", "3melon", "4celery" };
+            File.WriteAllLines(path, test);
+            int length1 = test.Length;
+
+            string[] arrayList = File.ReadAllLines(path);
+
+            int delIndex = 3;
+            Program.DeleteItem(path, delIndex);
+            
+            string[] newArray = File.ReadAllLines(path);
+
+            Assert.Equal(length1 - 1, newArray.Length);
+        }
     }
 }
